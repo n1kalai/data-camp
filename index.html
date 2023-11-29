@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div
+      id="show"
+      style="
+        display: none;
+        width: 400px;
+        height: 200px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        background-color: aliceblue;
+        transform: translate(-50%, -50%);
+      "
+    >
+      show sth
+    </div>
+    <div class="path-container">
+      <div id="walking-path">
+        <div id="man">
+          <div id="itemOnHead"></div>
+
+          <svg height="200" width="50" xmlns="http://www.w3.org/2000/svg">
+            <!-- Head -->
+            <circle id="head" cx="25" cy="25" r="15" fill="white">
+              <animate
+                attributeName="r"
+                values="15;14;15"
+                dur="1s"
+                repeatCount="indefinite"
+              />
+            </circle>
+
+            <!-- Mouth -->
+
+            <!-- <path
+          d="M 20 35 Q 25 40, 30 35"
+          fill="none"
+          stroke="red"
+          stroke-width="2"
+          id="smile-mouth"
+        /> -->
+
+            <path
+              d="M 20 35 Q 25 30, 30 35"
+              fill="none"
+              stroke="red"
+              stroke-width="2"
+              id="sad_mouth"
+            />
+
+            <!-- Right Eye -->
+            <circle id="right_eye" cx="23" cy="22" r="2" fill="transparent">
+              <animate
+                attributeName="r"
+                values="2;1;2"
+                dur="1s"
+                repeatCount="indefinite"
+              />
+            </circle>
+
+            <!-- Left Eye -->
+            <circle id="left_eye" cx="27" cy="22" r="2" fill="transparent">
+              <animate
+                attributeName="r"
+                values="2;1;2"
+                dur="1s"
+                repeatCount="indefinite"
+              />
+            </circle>
+
+            <!-- Body -->
+            <rect
+              x="18"
+              y="40"
+              rx="5"
+              ry="5"
+              width="15"
+              height="40"
+              fill="white"
+            />
+
+            <!-- Right Leg -->
+            <rect
+              x="20"
+              y="80"
+              width="5"
+              height="20"
+              stroke-width="1"
+              stroke="white"
+              rx="2"
+              ry="2"
+              id="right_leg"
+            >
+              <animate
+                attributeName="y"
+                values="80;90;80"
+                dur="0.5s"
+                repeatCount="indefinite"
+              />
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 22 100"
+                to="-20 22 100"
+                dur="0.25s"
+                repeatCount="indefinite"
+              />
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                from="0 0"
+                to="10 0"
+                dur="0.25s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <!-- Left Leg -->
+            <rect
+              x="25"
+              y="80"
+              width="5"
+              height="20"
+              stroke-width="1"
+              stroke="white"
+              rx="2"
+              ry="2"
+              id="left_leg"
+            >
+              <animate
+                attributeName="y"
+                values="80;90;80"
+                dur="0.5s"
+                repeatCount="indefinite"
+                begin="0.25s"
+              />
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="rotate"
+                from="0 28 100"
+                to="20 28 100"
+                dur="0.25s"
+                repeatCount="indefinite"
+              />
+              <animateTransform
+                attributeName="transform"
+                attributeType="XML"
+                type="translate"
+                from="0 0"
+                to="-10 0"
+                dur="0.25s"
+                repeatCount="indefinite"
+              />
+            </rect>
+
+            <!-- Right Hand -->
+            <g transform="translate(30 40)">
+              <rect
+                x="7"
+                y="0"
+                width="5"
+                height="20"
+                stroke-width="1"
+                stroke="white"
+                rx="2"
+                ry="2"
+                id="right_hand"
+              >
+                <animate
+                  attributeName="y"
+                  values="0;5;0"
+                  dur="0.5s"
+                  repeatCount="indefinite"
+                />
+              </rect>
+              <!-- Stick-like element -->
+              <line
+                x1="12.5"
+                y1="18"
+                x2="120.5"
+                y2="90"
+                stroke="white"
+                stroke-width="1"
+                transform="rotate(45 2.5 20)"
+              />
+            </g>
+
+            <!-- Left Hand -->
+            <g transform="translate(15 40)">
+              <rect
+                x="-5"
+                y="0"
+                width="5"
+                height="20"
+                stroke-width="1"
+                stroke="white"
+                rx="2"
+                ry="2"
+                id="left_hand"
+              >
+                <animate
+                  attributeName="y"
+                  values="0;5;0"
+                  dur="0.5s"
+                  repeatCount="indefinite"
+                  begin="0.25s"
+                />
+              </rect>
+            </g>
+          </svg>
+        </div>
+        <div class="obstacle" style="left: 400px"></div>
+        <div class="obstacle" style="left: 600px"></div>
+        <div class="obstacle" style="left: 800px"></div>
+        <div class="obstacle" style="left: 1000px"></div>
+        <div class="obstacle" style="left: 1200px"></div>
+      </div>
+    </div>
+    <div class="scroll-snap">
+      <section class="second_container">
+        <header>
+          <h2>Deppression</h2>
+          <p data-aos="zoom-in-right">
+            Depression, a multifaceted mental health condition, can stem from
+            various factors. Genetic predisposition plays a role, with a family
+            history of depression increasing vulnerability. Biological factors,
+            including neurotransmitter imbalances, contribute to mood regulation
+            disruptions. Psychological aspects, such as personality traits and
+            traumatic experiences, shape susceptibility. Chronic stress, major
+            life events, and social isolation intensify the risk. Environmental
+            factors, notably significant life changes, financial struggles, or
+            lack of support, impact mental well-being. Health conditions,
+            chronic illnesses, and hormonal fluctuations during life stages like
+            pregnancy or menopause also influence depressive tendencies.
+            Substance abuse forms a complex link, both contributing to and
+            resulting from depression.
+          </p>
+        </header>
+        <figure data-aos="zoom-in-left">
+          <img
+            src="https://images.pexels.com/photos/1995550/pexels-photo-1995550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          />
+        </figure>
+      </section>
+      <section class="second_container">
+        <header>
+          <h2>Deppression</h2>
+          <p data-aos="zoom-in-right">
+            Depression, a multifaceted mental health condition, can stem from
+            various factors. Genetic predisposition plays a role, with a family
+            history of depression increasing vulnerability. Biological factors,
+            including neurotransmitter imbalances, contribute to mood regulation
+            disruptions. Psychological aspects, such as personality traits and
+            traumatic experiences, shape susceptibility. Chronic stress, major
+            life events, and social isolation intensify the risk. Environmental
+            factors, notably significant life changes, financial struggles, or
+            lack of support, impact mental well-being. Health conditions,
+            chronic illnesses, and hormonal fluctuations during life stages like
+            pregnancy or menopause also influence depressive tendencies.
+            Substance abuse forms a complex link, both contributing to and
+            resulting from depression.
+          </p>
+        </header>
+        <figure data-aos="zoom-in-left">
+          <img
+            src="https://images.pexels.com/photos/1995550/pexels-photo-1995550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          />
+        </figure>
+      </section>
+    </div>
+    <section class="features">
+      <h2>მახასიათებლები</h2>
+      <section class="features_wrapper">
+        <article>
+          <figure>
+            <img src="./assets/icons/artificial-intelligence_8055576.png" />
+          </figure>
+          <h5>ხელოვნური ინტექლექტი</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut culpa
+            aliquid voluptates, necessitatibus rerum magnam quibusdam? Nisi
+            adipisci sit fugiat sunt aperiam? Aliquam maxime similique maiores
+            ex commodi quos est?
+          </p>
+        </article>
+        <article>
+          <figure>
+            <img src="./assets/icons/map_854878.png" />
+          </figure>
+          <h5>ჩაშენებული რუქა</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut culpa
+            aliquid voluptates, necessitatibus rerum magnam quibusdam? Nisi
+            adipisci sit fugiat sunt aperiam? Aliquam maxime similique maiores
+            ex commodi quos est?
+          </p>
+        </article>
+        <article>
+          <figure>
+            <img src="./assets/icons/artificial-intelligence_8055576.png" />
+          </figure>
+          <h5>3D ხედვა</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut culpa
+            aliquid voluptates, necessitatibus rerum magnam quibusdam? Nisi
+            adipisci sit fugiat sunt aperiam? Aliquam maxime similique maiores
+            ex commodi quos est?
+          </p>
+        </article>
+        <article>
+          <figure>
+            <img src="./assets/icons/4242430.png" />
+          </figure>
+          <h5>ხმოვანი ინფორმირება</h5>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut culpa
+            aliquid voluptates, necessitatibus rerum magnam quibusdam? Nisi
+            adipisci sit fugiat sunt aperiam? Aliquam maxime similique maiores
+            ex commodi quos est?
+          </p>
+        </article>
+      </section>
+    </section>
+    <script src="./script.js"></script>
+    <!-- <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script> -->
+  </body>
+</html>

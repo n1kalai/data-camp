@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: black;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      #man {
+        position: absolute;
+        bottom: 0;
+        left: 50px;
+        width: 50px;
+        height: 100px;
+        transition: left 1s, bottom 0.5s;
+      }
+
+      .obstacle {
+        position: absolute;
+        bottom: 0;
+        width: 50px;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        background-color: white;
+        transition: left 1s;
+      }
+
+      .obstacle:nth-child(1) {
+        height: 50px;
+      }
+      .obstacle:nth-child(2) {
+        height: 60px;
+      }
+      .obstacle:nth-child(3) {
+        height: 70px;
+      }
+      .obstacle:nth-child(4) {
+        height: 60px;
+      }
+      .obstacle:nth-child(5) {
+        height: 40px;
+      }
+      .obstacle:nth-child(6) {
+        height: 30px;
+      }
+
+      #itemOnHead {
+        position: absolute;
+        width: 30px;
+        height: 8px;
+        background-color: red;
+        display: none;
+        border-top-right-radius: 15px;
+        border-top-left-radius: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 5px;
+      }
+
+      .jump {
+        animation: jump 1.4s linear;
+      }
+
+      @keyframes jump {
+        0% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-130px);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+      .push_back {
+        left: 200px !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="man">
+      <div id="itemOnHead"></div>
+
+      <svg height="200" width="50" xmlns="http://www.w3.org/2000/svg">
+        <!-- Head -->
+        <circle cx="25" cy="25" r="15" fill="white">
+          <animate
+            attributeName="r"
+            values="15;14;15"
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </circle>
+
+        <!-- Right Eye -->
+        <circle id="right_eye" cx="23" cy="22" r="2" fill="white">
+          <animate
+            attributeName="r"
+            values="2;1;2"
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </circle>
+
+        <!-- Left Eye -->
+        <circle id="left_eye" cx="27" cy="22" r="2" fill="white">
+          <animate
+            attributeName="r"
+            values="2;1;2"
+            dur="1s"
+            repeatCount="indefinite"
+          />
+        </circle>
+
+        <!-- Body -->
+        <rect x="18" y="40" rx="5" ry="5" width="15" height="40" fill="white" />
+
+        <!-- Right Leg -->
+        <rect
+          x="20"
+          y="80"
+          width="5"
+          height="20"
+          stroke-width="1"
+          stroke="white"
+          rx="2"
+          ry="2"
+        >
+          <animate
+            attributeName="y"
+            values="80;90;80"
+            dur="0.5s"
+            repeatCount="indefinite"
+          />
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            from="0 22 100"
+            to="-20 22 100"
+            dur="0.25s"
+            repeatCount="indefinite"
+          />
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            from="0 0"
+            to="10 0"
+            dur="0.25s"
+            repeatCount="indefinite"
+          />
+        </rect>
+
+        <!-- Left Leg -->
+        <rect
+          x="25"
+          y="80"
+          width="5"
+          height="20"
+          stroke-width="1"
+          stroke="white"
+          rx="2"
+          ry="2"
+        >
+          <animate
+            attributeName="y"
+            values="80;90;80"
+            dur="0.5s"
+            repeatCount="indefinite"
+            begin="0.25s"
+          />
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="rotate"
+            from="0 28 100"
+            to="20 28 100"
+            dur="0.25s"
+            repeatCount="indefinite"
+          />
+          <animateTransform
+            attributeName="transform"
+            attributeType="XML"
+            type="translate"
+            from="0 0"
+            to="-10 0"
+            dur="0.25s"
+            repeatCount="indefinite"
+          />
+        </rect>
+
+        <!-- Right Hand -->
+        <g transform="translate(30 40)">
+          <rect
+            x="7"
+            y="0"
+            width="5"
+            height="20"
+            stroke-width="1"
+            stroke="white"
+            rx="2"
+            ry="2"
+          >
+            <animate
+              attributeName="y"
+              values="0;5;0"
+              dur="0.5s"
+              repeatCount="indefinite"
+            />
+          </rect>
+          <!-- Stick-like element -->
+          <line
+            x1="12.5"
+            y1="18"
+            x2="120.5"
+            y2="70"
+            stroke="white"
+            stroke-width="1"
+            transform="rotate(45 2.5 20)"
+          />
+        </g>
+
+        <!-- Left Hand -->
+        <g transform="translate(15 40)">
+          <rect
+            x="-5"
+            y="0"
+            width="5"
+            height="20"
+            stroke-width="1"
+            stroke="white"
+            rx="2"
+            ry="2"
+          >
+            <animate
+              attributeName="y"
+              values="0;5;0"
+              dur="0.5s"
+              repeatCount="indefinite"
+              begin="0.25s"
+            />
+          </rect>
+        </g>
+      </svg>
+    </div>
+    <div class="obstacle" style="left: 400px"></div>
+    <div class="obstacle" style="left: 600px"></div>
+    <div class="obstacle" style="left: 800px"></div>
+    <div class="obstacle" style="left: 1000px"></div>
+    <div class="obstacle" style="left: 1200px"></div>
+
+    <script>
+      const man = document.getElementById("man");
+      const itemOnHead = document.getElementById("itemOnHead");
+      const obstacles = document.querySelectorAll(".obstacle");
+
+      // Initial setup
+      let isCrashed = false;
+      let isPaused = false;
+      let isJumping = false;
+      let timer;
+
+      const firstObsLeft = obstacles[0].getBoundingClientRect().right;
+      const secObsLeft = obstacles[1].getBoundingClientRect().left;
+      const thirdObsLeft = obstacles[2].getBoundingClientRect().left;
+      const fourthObsLeft = obstacles[3].getBoundingClientRect().left;
+      const fifthObsLeft = obstacles[4].getBoundingClientRect().left;
+
+      let jumpedOverFirst = true;
+      let jumpedOverSecond = false;
+      let jumpedOverThird = false;
+      let jumpedOverFourth = false;
+      let jumpedOverFifth = false;
+
+      // Event listener for keydown events
+      document.addEventListener("keydown", (event) => {
+        if (event.key === " ") {
+          isPaused = !isPaused;
+          if (!isPaused) {
+            animate(); // Resume animation
+          } else {
+            clearTimeout(timer); // Pause animation
+          }
+        }
+      });
+
+      // Animation loop
+      function animate() {
+        const position = man.getBoundingClientRect();
+        man.style.left = position.left + 200 + "px";
+
+        const manDistance = man.getBoundingClientRect().left;
+
+        if (!isCrashed && firstObsLeft - manDistance < 100 && jumpedOverFirst) {
+          isCrashed = true;
+          jumpedOverFirst = false;
+          man.classList.add("push_back");
+        }
+
+        if (
+          secObsLeft - manDistance < 50 &&
+          secObsLeft - manDistance > 20 &&
+          !jumpedOverSecond
+        ) {
+          clearTimeout(timer);
+
+          man.classList.add("jump");
+          jumpedOverSecond = true;
+          timer = setTimeout(() => {
+            man.classList.remove("jump");
+          }, 2000);
+        }
+        if (
+          thirdObsLeft - manDistance < 50 &&
+          thirdObsLeft - manDistance > 20 &&
+          !jumpedOverThird
+        ) {
+          clearTimeout(timer);
+          man.classList.add("jump");
+          jumpedOverThird = true;
+          timer = setTimeout(() => {
+            man.classList.remove("jump");
+          }, 2000);
+        }
+        if (
+          fourthObsLeft - manDistance < 50 &&
+          fourthObsLeft - manDistance > 20 &&
+          !jumpedOverFourth
+        ) {
+          man.classList.add("jump");
+          jumpedOverFourth = true;
+          setTimeout(() => {
+            man.classList.remove("jump");
+          }, 2000);
+        }
+        if (
+          fifthObsLeft - manDistance < 50 &&
+          fifthObsLeft - manDistance > 20 &&
+          !jumpedOverFifth
+        ) {
+          man.classList.add("jump");
+          jumpedOverFifth = true;
+          setTimeout(() => {
+            man.classList.remove("jump");
+          }, 2000);
+        }
+
+        if (!isPaused) {
+          requestAnimationFrame(animate);
+        }
+      }
+
+      animate(); // Start the animation loop
+    </script>
+  </body>
+</html>
