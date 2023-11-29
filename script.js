@@ -1,12 +1,9 @@
 const man = document.getElementById("man");
 const obstacles = document.querySelectorAll(".obstacle");
-const itemOnHead = document.getElementById("itemOnHead");
 
 const firstObsLeft = obstacles[0].getBoundingClientRect().right;
 const secObsLeft = obstacles[1].getBoundingClientRect().left;
-const thirdObsLeft = obstacles[2].getBoundingClientRect().left;
-const fourthObsLeft = obstacles[3].getBoundingClientRect().left;
-const fifthObsLeft = obstacles[4].getBoundingClientRect().left;
+
 
 
 document.addEventListener("keydown", (event) => {
@@ -51,7 +48,6 @@ function start(){
       man.classList.add("drop_down");
 
     timeoutId = setTimeout(() => {
-      itemOnHead.style.display = "block";
       man.classList.remove("push_forward");
       man.classList.remove("drop_down");
     
@@ -73,7 +69,7 @@ function start(){
         setTimeout(() => {
           
           window.scrollTo({top: window.innerHeight, behavior: 'smooth'});
-        }, 1500);
+        }, 500);
       
   
     }
@@ -83,7 +79,7 @@ function start(){
       position += 50
       man.style.left = position + "px"
   }
-  }, 150)
+  }, 400)
 }
 
 function stop(){
