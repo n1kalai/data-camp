@@ -10,11 +10,11 @@ const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
 const clientHeight = document.documentElement.clientHeight;
 const scrollHeight = document.documentElement.scrollHeight;
 
-return scrollTop + clientHeight >= scrollHeight;
+return scrollTop + clientHeight >= scrollHeight - window.scrollY / 4;
 }
 
 document.addEventListener("scroll", ()=>{
-if (window.scrollY> 1500 && window.scrollY < 1900)  {  
+if (window.scrollY > 1500 && window.scrollY < 1900)  {  
   start()
 };
 
@@ -127,7 +127,7 @@ function start(){
       position += 50
       man.style.left = position + "px"
   }
-  }, 400)
+  }, 550)
 }
 
 function stop(){
