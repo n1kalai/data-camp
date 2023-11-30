@@ -4,6 +4,36 @@ const obstacles = document.querySelectorAll(".obstacle");
 const firstObsLeft = obstacles[0].getBoundingClientRect().right;
 const secObsLeft = obstacles[1].getBoundingClientRect().left;
 
+function scrollFinished(){
+  
+const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+const clientHeight = document.documentElement.clientHeight;
+const scrollHeight = document.documentElement.scrollHeight;
+
+return scrollTop + clientHeight >= scrollHeight;
+}
+
+document.addEventListener("scroll", ()=>{
+if (window.scrollY> 1500 && window.scrollY < 1900)  {  
+  start()
+};
+
+// jump man when scrolling
+if(scrollFinished()){
+  //
+  // man_2.style.bottom = -50+ "px";
+  man_2.classList.add('jump_up')
+  setTimeout(() => {
+   
+    
+      car_final.style.left = 2000 + "px";
+   
+  },1500)
+ 
+
+}
+
+})
 
 
 document.addEventListener("keydown", (event) => {
@@ -16,6 +46,22 @@ document.addEventListener("keydown", (event) => {
       start()
     }
   }
+  
+  if (event.key === "r") {
+      man.style.left = 50 + "px";
+      man.classList.remove('push_back')
+      start()
+  }
+
+  if (event.key === "d") {
+    man.style.left = 800 + "px";
+  }
+
+  if (event.key === "w") {
+    man_2.style.left = 1000 + "px";
+    man_2.style.bottom = -250 + "px";
+  }
+
 
 });
 
@@ -67,9 +113,11 @@ function start(){
          left_hand.innerHTML =''
 
         setTimeout(() => {
-          
-          window.scrollTo({top: window.innerHeight, behavior: 'smooth'});
-        }, 500);
+        
+          man_2.style.left = 1000 + "px";
+          man_2.style.bottom = -250 + "px";
+         
+        }, 1500);
       
   
     }
@@ -86,8 +134,4 @@ function stop(){
   isPaused = true
   clearInterval(intervalId)
 }
-
-
-start()
-
 
